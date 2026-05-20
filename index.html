@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ferramenta digital para preenchimento e impressão de receituários médicos — UBS Família da Placa, Rio do Pires / BA">
+  <meta name="author" content="Jorge Inácio">
+  <title>Receituário Digital — UBS Família da Placa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@300;400;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       TOPBAR
+  ══════════════════════════════════════════════ -->
+  <header class="topbar" role="banner">
+    <h1 class="topbar__title">Receituário Digital</h1>
+    <span class="topbar__badge" aria-label="Sistema Único de Saúde">SUS</span>
+  </header>
+
+  <!-- ══════════════════════════════════════════════
+       APP LAYOUT
+  ══════════════════════════════════════════════ -->
+  <div class="app-layout">
+
+    <!-- ── SIDEBAR (formulário) ── -->
+    <aside class="sidebar" aria-label="Formulário do receituário">
+
+      <!-- Emitente (fixo) -->
+      <section aria-labelledby="emitente-label">
+        <p class="section-label" id="emitente-label">Emitente</p>
+        <div class="emitente-card">
+          <p class="emitente-card__name">
+            Dra. Virgínia Rodrigues Azevedo
+            <span class="emitente-card__crm">(CRM-BA 49896)</span>
+          </p>
+          <p class="emitente-card__address">Comunidade de Placa – Rio do Pires / BA</p>
+        </div>
+        <p class="emitente-card__lock" aria-hidden="true">🔒 Dados fixos da unidade</p>
+      </section>
+
+      <!-- Data da prescrição -->
+      <section aria-labelledby="date-label">
+        <p class="section-label" id="date-label">Data da prescrição</p>
+        <input
+          type="date"
+          id="date-input"
+          class="field-input"
+          aria-label="Data da prescrição"
+        >
+      </section>
+
+      <!-- Paciente -->
+      <section aria-labelledby="patient-label">
+        <p class="section-label" id="patient-label">Paciente</p>
+        <label class="field-label" for="patient-name">Nome</label>
+        <input
+          type="text"
+          id="patient-name"
+          class="field-input"
+          aria-label="Nome do paciente"
+        >
+      </section>
+
+      <!-- Medicamentos -->
+      <section aria-labelledby="meds-label">
+        <p class="section-label" id="meds-label">Medicamentos</p>
+        <div id="med-list" role="list" aria-label="Lista de medicamentos"></div>
+        <button
+          type="button"
+          class="btn btn--add"
+          onclick="addMedBlock()"
+          aria-label="Adicionar medicamento"
+        >
+          <span aria-hidden="true">＋</span> Adicionar medicamento
+        </button>
+      </section>
+
+      <!-- Ações -->
+      <div class="sidebar__actions">
+        <button
+          type="button"
+          class="btn btn--print"
+          onclick="window.print()"
+          aria-label="Imprimir receituário"
+        >
+          🖨️ Imprimir Receituário
+        </button>
+        <button
+          type="button"
+          class="btn btn--clear"
+          onclick="clearForm()"
+          aria-label="Limpar formulário"
+        >
+          Limpar formulário
+        </button>
+      </div>
+
+      <!-- Marca d'água -->
+      <p class="watermark" aria-hidden="true">
+        Ferramenta desenvolvida pelo<br>
+        <span class="watermark__name">Engenheiro de Computação</span>
+        <span class="watermark__name">Jorge Inácio</span>
+      </p>
+
+    </aside>
+
+    <!-- ── PREVIEW ── -->
+    <main class="preview-area" aria-label="Pré-visualização do receituário">
+      <p class="preview-area__label" aria-hidden="true">Pré-visualização</p>
+
+      <div class="receipt-page" role="document" aria-label="Receituário para impressão">
+
+        <!-- VIA 1 -->
+        <article class="receipt-copy" aria-label="1ª via">
+          <header class="receipt-header">
+            <div class="receipt-header__logos">
+              <img
+                class="receipt-header__logo-pref"
+                src="assets/logo-prefeitura.png"
+                alt="Prefeitura de Rio do Pires"
+              >
+              <img
+                class="receipt-header__logo-sus"
+                src="assets/logo-sus.png"
+                alt="SUS — Sistema Único de Saúde"
+              >
+            </div>
+            <p class="receipt-header__org">
+              Secretaria Municipal de Saúde<br>
+              Unidade Básica de Saúde da Família da Placa
+            </p>
+          </header>
+
+          <div class="receipt-via">
+            <span class="receipt-via__title">RECEITUÁRIO</span>
+            <span class="receipt-via__subtitle">
+              1ª VIA – RETENÇÃO NA<br>FARMÁCIA OU DROGARIA
+            </span>
+          </div>
+
+          <section class="receipt-section">
+            <h2 class="receipt-section__title">Emitente</h2>
+            <p class="receipt-section__text">
+              Dra. Virgínia Rodrigues Azevedo (CRM-BA 49896)
+              Comunidade de Placa – Rio do Pires / BA
+            </p>
+          </section>
+
+          <section class="receipt-section">
+            <h2 class="receipt-section__title">Paciente</h2>
+            <p class="receipt-section__text" id="copy-1-patient">—</p>
+          </section>
+
+          <section class="receipt-section receipt-section--flex">
+            <h2 class="receipt-section__title">Medicamentos</h2>
+            <div class="receipt-med-boxes" id="copy-1-meds" aria-live="polite"></div>
+          </section>
+
+          <footer class="receipt-signature">
+            <div class="receipt-signature__line" aria-hidden="true"></div>
+            <p class="receipt-signature__name">Dra. Virgínia Rodrigues Azevedo</p>
+            <p class="receipt-signature__role">Médica – CRM-BA 49896</p>
+            <p class="receipt-signature__date" id="copy-1-date"></p>
+          </footer>
+        </article>
+
+        <!-- VIA 2 -->
+        <article class="receipt-copy" aria-label="2ª via">
+          <header class="receipt-header">
+            <div class="receipt-header__logos">
+              <img
+                class="receipt-header__logo-pref"
+                src="assets/logo-prefeitura.png"
+                alt="Prefeitura de Rio do Pires"
+              >
+              <img
+                class="receipt-header__logo-sus"
+                src="assets/logo-sus.png"
+                alt="SUS — Sistema Único de Saúde"
+              >
+            </div>
+            <p class="receipt-header__org">
+              Secretaria Municipal de Saúde<br>
+              Unidade Básica de Saúde da Família da Placa
+            </p>
+          </header>
+
+          <div class="receipt-via">
+            <span class="receipt-via__title">RECEITUÁRIO</span>
+            <span class="receipt-via__subtitle">
+              1ª VIA – RETENÇÃO NA<br>FARMÁCIA OU DROGARIA
+            </span>
+          </div>
+
+          <section class="receipt-section">
+            <h2 class="receipt-section__title">Emitente</h2>
+            <p class="receipt-section__text">
+              Dra. Virgínia Rodrigues Azevedo (CRM-BA 49896)
+              Comunidade de Placa – Rio do Pires / BA
+            </p>
+          </section>
+
+          <section class="receipt-section">
+            <h2 class="receipt-section__title">Paciente</h2>
+            <p class="receipt-section__text" id="copy-2-patient">—</p>
+          </section>
+
+          <section class="receipt-section receipt-section--flex">
+            <h2 class="receipt-section__title">Medicamentos</h2>
+            <div class="receipt-med-boxes" id="copy-2-meds" aria-live="polite"></div>
+          </section>
+
+          <footer class="receipt-signature">
+            <div class="receipt-signature__line" aria-hidden="true"></div>
+            <p class="receipt-signature__name">Dra. Virgínia Rodrigues Azevedo</p>
+            <p class="receipt-signature__role">Médica – CRM-BA 49896</p>
+            <p class="receipt-signature__date" id="copy-2-date"></p>
+          </footer>
+        </article>
+
+      </div><!-- /.receipt-page -->
+    </main>
+
+  </div><!-- /.app-layout -->
+
+  <script src="js/app.js"></script>
+</body>
+</html>
