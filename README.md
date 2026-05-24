@@ -1,8 +1,8 @@
-# 🩺 Receituário Digital — UBS Família da Placa
+# 🩺 Receituário Digital
 
-> Ferramenta web para preenchimento e impressão de receituários médicos da Unidade Básica de Saúde da Família da Placa, município de Rio do Pires / BA.
+> Ferramenta web para preenchimento e impressão de receituários médicos da Unidade Básica de Saúde da Família da Placa e Hospital Municipal de Rio do Pires, município de Rio do Pires / BA.
 
-[![GitHub Pages](https://img.shields.io/badge/Acesse%20o%20projeto-online-2d6a4f?style=for-the-badge&logo=github)](https://inaciooow.github.io/receituario-digital-ubs/)
+[![GitHub Pages](https://img.shields.io/badge/Acesse%20o%20projeto-online-2d6a4f?style=for-the-badge&logo=github)](https://inaciooow.github.io/receituario-digital/)
 ![HTML5](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
@@ -11,7 +11,7 @@
 
 ## 📌 Sobre o projeto
 
-A UBS Família da Placa utilizava um modelo de receituário em PDF que precisava ser preenchido manualmente e reimpresso a cada consulta. Este projeto substituiu esse fluxo por uma **ferramenta web leve, sem instalação e sem dependências**, acessível diretamente pelo navegador.
+A UBS Família da Placa e o Hospital Municipal de Rio do Pires utilizavam um modelo de receituário em PDF que precisava ser preenchido manualmente e reimpresso a cada consulta. Este projeto substituiu esse fluxo por uma **ferramenta web leve, sem instalação e sem dependências**, acessível diretamente pelo navegador.
 
 A médica preenche os dados, visualiza o resultado em tempo real e imprime com um clique — gerando as **duas vias do receituário lado a lado** em uma única folha A4, exatamente no formato exigido pela unidade.
 
@@ -34,14 +34,14 @@ A médica preenche os dados, visualiza o resultado em tempo real e imprime com u
 
 ## 🖥️ Demo
 
-🔗 **[https://inaciooow.github.io/receituario-digital-ubs/](https://inaciooow.github.io/receituario-digital-ubs/)**
+🔗 **[https://inaciooow.github.io/receituario-digital-ubs/](https://inaciooow.github.io/receituario-digital/)**
 
 ---
 
 ## 🗂️ Estrutura do projeto
 
 ```
-receituario-digital-ubs/
+receituario-digital/
 ├── index.html              # Estrutura principal — HTML semântico e acessível
 ├── css/
 │   └── style.css           # Design system com variáveis CSS e BEM parcial
@@ -76,7 +76,7 @@ receituario-digital-ubs/
 
 ## 📋 Contexto real
 
-Projeto desenvolvido para uso real na UBS Família da Placa, atendendo uma demanda concreta da equipe de saúde do município de Rio do Pires, BA. A solução foi desenhada para rodar em qualquer computador da unidade, sem instalação, servidor ou configuração — basta abrir o link.
+Projeto desenvolvido para uso real na UBS Família da Placa e Hospital Municipal de Rio do Pires, atendendo uma demanda concreta da equipe de saúde do município de Rio do Pires, BA. A solução foi desenhada para rodar em qualquer computador da unidade, sem instalação, servidor ou configuração — basta abrir o link.
 
 ---
 
